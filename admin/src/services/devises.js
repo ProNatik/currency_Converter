@@ -25,6 +25,13 @@ export async function paireCreate(from_devise, to_devise, value) {
     return response.data
 }
 
+export async function paireUpdate(from_devise, to_devise, value) {
+    const response = await axiosClient.put(`/paires/${from_devise}/${to_devise}`, {
+        value
+    });
+    return response.data
+}
+
 export async function paireRemove(paire) {
     const response = await axiosClient.delete(`/paires/${paire.from_devise}/${paire.to_devise}`);
     return response.data

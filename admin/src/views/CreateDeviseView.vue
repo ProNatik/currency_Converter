@@ -3,6 +3,7 @@
 import { useTitle } from '@vueuse/core';
 import { reactive, ref } from 'vue';
 import axiosClient from '../axios';
+import NavBar from '../components/NavBar.vue';
 
 useTitle('Create - CurrencyConverter')
 
@@ -40,6 +41,7 @@ const formState = ref();
 </script>
 
 <template>
+    <NavBar />
     <v-sheet width="200" class="mx-auto">
         <v-form validate-on="blur" @submit.prevent="addDevise" v-model="formState" >
             <v-text-field
@@ -47,7 +49,10 @@ const formState = ref();
                 :rules="[rules.required]"
                 label="Devise"
             ></v-text-field>
-            <v-btn :loading="loading" type="submit" block class="mt-2" text="Add"></v-btn>
+            <div class="text-center">
+                <v-btn :loading="loading" type="submit" class="mt-2" text="Add" maxWidth="40px"></v-btn>
+            </div>
+            
         </v-form>
         <v-alert type="error" v-if="error" :text="error" />
         <v-alert type="success" v-if="success" :text="success" />

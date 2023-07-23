@@ -1,9 +1,9 @@
 <script setup>
 import { useTitle } from '@vueuse/core';
 import { ref, reactive } from 'vue';
-import axiosClient from '../axios';
 import { useDevises } from '@/composables/devises.js'
 import { paireCreate } from '@/services/devises.js'
+import NavBar from '../components/NavBar.vue';
 
 useTitle('Add Paire - CurrencyConverter')
 
@@ -24,9 +24,11 @@ const rules = {
   required_select: (value) => value !== '' || 'Champs obligatoire',
 }
 
+const isLoading = ref(false);
+
 async function addPaire() { 
   if (formState.value) {
-    loading.value = true;
+    isLoading.value = true;
     try {
       await paireCreate(form.from_devise, form.to_devise, form.value);
 
@@ -34,7 +36,7 @@ async function addPaire() {
     } catch (err) {
       error.value = err.message
     } finally {
-      loading.value = false
+      isLoading.value = false
     }   
   }
 }
@@ -43,6 +45,7 @@ const formState = ref();
 </script>
 
 <template>
+    <NavBar />
     <v-sheet max-width="800" class="mx-auto">
         <v-form validate-on="blur" @submit.prevent="addPaire" v-model="formState">
             <v-row>
@@ -98,13 +101,15 @@ const formState = ref();
                     ></v-text-field>
                 </v-col>
             </v-row>
-            <v-btn
-            :loading="loading"
-            type="submit"
-            block
-            class="mt-2"
-            text="Add"
-            ></v-btn>
+            <div class="text-center">
+                <v-btn
+                :loading="isLoading"
+                type="submit"
+                text="Add"
+                maxWidth="50px"
+                ></v-btn>
+            </div>
+            
         </v-form>
         <v-alert type="error" v-if="error" :text="error" />
         <v-alert type="success" v-if="success" :text="success" />

@@ -3,6 +3,7 @@ import { reactive, ref } from 'vue';
 import { useTitle } from '@vueuse/core'
 import axios from 'axios'
 import { useRouter } from 'vue-router';
+import GuestNavBar from '../components/GuestNavBar.vue';
 
 useTitle('Login - CurrencyConverter')
 
@@ -46,6 +47,7 @@ const formState = ref();
 </script>
 
 <template>
+  <GuestNavBar />
     <v-sheet max-width="300" class="mx-auto">
       <v-form validate-on="blur" @submit.prevent="submit" v-model="formState">
         <v-text-field

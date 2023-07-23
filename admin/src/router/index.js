@@ -4,6 +4,7 @@ import LoginView from '@/views/LoginView.vue'
 import HomeView from '@/views/HomeView.vue'
 import CreateDeviseView from '@/views/CreateDeviseView.vue'
 import CreatePaireView from '@/views/CreatePaireView.vue'
+import UpdatePaireView from '@/views/UpdatePaireView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -29,6 +30,13 @@ const router = createRouter({
       path: '/createPaire',
       name: 'createPaire',
       component: CreatePaireView,
+      meta: {requiresAuth: true}
+    },
+    {
+      path: '/updatePaire/:from_devise/:to_devise/:value',
+      name: 'updatePaire',
+      component: UpdatePaireView,
+      props: true,
       meta: {requiresAuth: true}
     },
     // {
