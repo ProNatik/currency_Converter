@@ -54,6 +54,7 @@ const formState = ref();
                         variant="outlined"
                         v-model="form.from_devise"                        
                         label="From"
+                        readonly
                     ></v-text-field>
                 </v-col>
                 <v-col
@@ -64,6 +65,7 @@ const formState = ref();
                         variant="outlined"
                         v-model="form.to_devise"                       
                         label="To"
+                        readonly
                     ></v-text-field>
                 </v-col>
                 <v-col
