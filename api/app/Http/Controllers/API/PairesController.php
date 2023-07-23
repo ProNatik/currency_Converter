@@ -67,6 +67,14 @@ class PairesController extends Controller
         return response()->json(["from" => $result->from_devise, "to" => $result->to_devise, "converted" => $converted], 201);
     }
 
+    public function updatePaire($from_devise, $to_devise, Request $request)
+    {
+        $updated = DB::table('paires')->where('from_devise', $from_devise)
+                                      ->where('to_devise', $to_devise)
+                                      ->update(['value' => $request['value']]);
+        return response()->json('updated');
+    }
+
     public function deletePaire($from_devise, $to_devise)
     {
         $deleted = DB::table('paires')->where('from_devise', $from_devise)

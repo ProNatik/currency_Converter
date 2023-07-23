@@ -20,11 +20,13 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::post('login', [AuthController::class, 'login']);
+Route::post('logout', [AuthController::class, 'logout']);
 
 // Route::middleware('auth:sanctum')->group( function() {
     Route::apiResource('devises', DevisesController::class); //Les routes devises.* de l'API
     Route::apiResource('paires', PairesController::class);
     Route::get('paires/{from_devise}/{to_devise}/{value}', [PairesController::class, 'valuePaire']);
+    Route::put('paires/{from_devise}/{to_devise}', [PairesController::class, 'updatePaire']);
     Route::delete('paires/{from_devise}/{to_devise}', [PairesController::class, 'deletePaire']);
 // });
 
